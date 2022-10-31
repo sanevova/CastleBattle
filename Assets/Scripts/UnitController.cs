@@ -10,10 +10,14 @@ public class UnitController : MonoBehaviour {
     private Vector3 movementDirection;
 
     private CharacterController characterController;
+    private float ySpeed;
 
     void Start() {
         characterController = GetComponent<CharacterController>();
         movementDirection = Vector3.forward;
+        if (!characterController.isGrounded) {
+            ySpeed = -2000f;
+        }
     }
 
     void Update() {
@@ -25,10 +29,20 @@ public class UnitController : MonoBehaviour {
             }
         }
 
-        characterController.Move(movementDirection * speed);
+        AdjustYSpeed();
+        var velocity = movementDirection * speed;
+        velocity.y += ySpeed;
+        characterController.Move(velocity * Time.deltaTime);
 
         var dstRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, dstRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    void AdjustYSpeed() {
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+        if (characterController.isGrounded) {
+            ySpeed = -1f;
+        }
     }
 
 }
