@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerController : MonoBehaviour {
-    public GameObject spawnTarget;
+public class SpawnerController : Killable {
+    [Header("Spawner")]
+    public UnitController spawnTarget;
     public Transform spawnPoint;
     public float spawnDelay;
 
-    private float lastSpawnTime = 0;
+    private float lastSpawnTime;
 
 
     void Start() {
-        // spawnDelay = Mathf.Max(spawnDelay, 5);
+        // don't spawn immediately and wait spawnDelay first
+        lastSpawnTime = Time.time;
     }
 
     void Update() {
@@ -26,6 +28,7 @@ public class SpawnerController : MonoBehaviour {
     }
 
     void Spawn() {
-        Instantiate(spawnTarget, spawnPoint.position, Quaternion.identity);
+        var spawn = Instantiate(spawnTarget, spawnPoint.position, Quaternion.identity);
+        spawn.owner = owner;
     }
 }

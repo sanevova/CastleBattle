@@ -71,7 +71,7 @@ public class UnitController : Killable {
     void AdjustYSpeed() {
         ySpeed += Physics.gravity.y * Time.deltaTime;
         if (characterController.isGrounded) {
-            ySpeed = -1f;
+            ySpeed = -2000f;
         }
     }
 
@@ -79,7 +79,7 @@ public class UnitController : Killable {
         return FindObjectsOfType<Killable>()
             .Where(guy => IsEnemy(guy))
             .OrderBy(
-                guy => Vector3.Distance(transform.position, guy.transform.position)
+                guy => DistanceTo(guy)
             )
             .FirstOrDefault(x => x);
     }
@@ -93,11 +93,10 @@ public class UnitController : Killable {
         if (target == null) {
             return;
         }
-        var vectorToTarget = target.transform.position - transform.position;
         // if in attack range
-        if (vectorToTarget.magnitude > basicAttackRadius) {
+        if (DistanceTo(target) > basicAttackRadius) {
             // move
-            movementDirection = vectorToTarget;
+            movementDirection = target.transform.position - transform.position;
         } else {
             // stop
             movementDirection = Vector3.zero;
@@ -113,6 +112,18 @@ public class UnitController : Killable {
         animator.SetBool("isAttacking", true);
         attackTarget.hp.TakeDamage(basicAttackDamage);
         basicAttackLastTime = Time.time;
+    }
+
+    private bool IsEnemy(Killable other) {
+        return owner.team != other.owner.team;
+    }
+
+    private float DistanceTo(Killable other) {
+        return other.DistanceFrom(this);
+    }
+
+    public override float DistanceFrom(Killable other) {
+        return Vector3.Distance(transform.position, other.transform.position);
     }
 
 }
