@@ -87,9 +87,7 @@ public class UnitController : Killable {
     private void Aggro() {
         // default is not attacking
         animator.SetBool("isAttacking", false);
-        if (target == null) {
-            target = ClosestEnemy();
-        }
+        target = ClosestEnemy();
         if (target == null) {
             return;
         }
