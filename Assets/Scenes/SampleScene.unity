@@ -297,7 +297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: -0.24184473, y: 0.66446304, z: -0.24184473, w: -0.66446304}
-  m_LocalPosition: {x: 538.18274, y: 150, z: 355.74527}
+  m_LocalPosition: {x: 511.75, y: 104.4, z: 338.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 618b0e3f6c65dd247a4a016150006c57, type: 3}
   m_Name: 
@@ -666,7 +666,7 @@ MonoBehaviour:
   spawnTarget: {fileID: 2247493744586806491, guid: c45172c16d6d48e418e6c6785924e22f,
     type: 3}
   spawnPoint: {fileID: 730608747}
-  spawnDelay: 5
+  spawnDelay: 2000000
 --- !u!1 &1066263845
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,10 +843,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1554570371}
     m_Modifications:
+    - target: {fileID: 1627238513, guid: c45172c16d6d48e418e6c6785924e22f, type: 3}
+      propertyPath: y
+      value: 1.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627238513, guid: c45172c16d6d48e418e6c6785924e22f, type: 3}
+      propertyPath: z
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 1475882204804550241, guid: c45172c16d6d48e418e6c6785924e22f,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475882204804550241, guid: c45172c16d6d48e418e6c6785924e22f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475882204804550241, guid: c45172c16d6d48e418e6c6785924e22f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475882204804550241, guid: c45172c16d6d48e418e6c6785924e22f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1475882204804550241, guid: c45172c16d6d48e418e6c6785924e22f,
         type: 3}

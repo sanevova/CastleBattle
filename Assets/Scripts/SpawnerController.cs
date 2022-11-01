@@ -11,7 +11,7 @@ public class SpawnerController : MonoBehaviour {
 
 
     void Start() {
-        spawnDelay = Mathf.Max(spawnDelay, 5);
+        // spawnDelay = Mathf.Max(spawnDelay, 5);
     }
 
     void Update() {

@@ -30,9 +30,11 @@ public class UnitController : Killable {
     private Vector3 movementDirection;
     private CharacterController characterController;
     private float ySpeed;
+    private Animator animator;
 
     void Start() {
         characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
         movementDirection = Vector3.forward;
         if (!characterController.isGrounded) {
             ySpeed = -2000f;
@@ -57,8 +59,11 @@ public class UnitController : Killable {
         characterController.Move(velocity * Time.deltaTime);
 
         if (movementDirection != Vector3.zero) {
+            animator.SetBool("isMoving", true);
             var dstRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, dstRotation, rotationSpeed * Time.deltaTime);
+        } else {
+            animator.SetBool("isMoving", false);
         }
     }
 
@@ -80,6 +85,8 @@ public class UnitController : Killable {
     }
 
     private void Aggro() {
+        // default is not attacking
+        animator.SetBool("isAttacking", false);
         if (target == null) {
             target = ClosestEnemy();
         }
@@ -87,10 +94,14 @@ public class UnitController : Killable {
             return;
         }
         var vectorToTarget = target.transform.position - transform.position;
+        // if in attack range
         if (vectorToTarget.magnitude > basicAttackRadius) {
+            // move
             movementDirection = vectorToTarget;
         } else {
+            // stop
             movementDirection = Vector3.zero;
+            // hit
             BasicAttack(target);
         }
     }
@@ -99,7 +110,7 @@ public class UnitController : Killable {
         if (Time.time - basicAttackLastTime < basicAttackCooldown) {
             return;
         }
-        // gain mana? OnAttack();
+        animator.SetBool("isAttacking", true);
         attackTarget.hp.TakeDamage(basicAttackDamage);
         basicAttackLastTime = Time.time;
     }

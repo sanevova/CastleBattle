@@ -148,10 +148,11 @@ MonoBehaviour:
   hp: {fileID: 0}
   speed: 50
   rotationSpeed: 540
-  basicAttackRadius: 10
-  basicAttackCooldown: 2
+  basicAttackRadius: 20
+  basicAttackCooldown: 5
   basicAttackDamage: 10
-  m_target: {fileID: 0}
+  y: 1.1
+  z: 0.04
 --- !u!114 &8569312055262630181
 MonoBehaviour:
   m_ObjectHideFlags: 0

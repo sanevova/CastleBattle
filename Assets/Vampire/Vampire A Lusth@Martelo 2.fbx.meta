@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 21bca738ec4b757459225353d62e2b0d
+guid: 7e21de078fff36a428da68475fb2e170
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Old Man Idle
+    second: Martelo 2
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,19 +36,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Old Man Idle
+      name: Martelo 2
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 365
+      lastFrame: 43
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
