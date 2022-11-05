@@ -78,15 +78,14 @@ public class UnitController : Killable {
     public Killable ClosestEnemy() {
         return FindObjectsOfType<Killable>()
             .Where(guy => IsEnemy(guy))
-            .OrderBy(
-                guy => DistanceTo(guy)
-            )
+            .OrderBy(guy => DistanceTo(guy))
             .FirstOrDefault(x => x);
     }
 
     private void Aggro() {
         // default is not attacking
         animator.SetBool("isAttacking", false);
+        animator.SetBool("isDead", false);
         target = ClosestEnemy();
         if (target == null) {
             return;
@@ -124,4 +123,9 @@ public class UnitController : Killable {
         return Vector3.Distance(transform.position, other.transform.position);
     }
 
+    public override void Die() {
+        animator.Play("Death");
+        base.Die();
+        Destroy(gameObject, 3f);
+    }
 }

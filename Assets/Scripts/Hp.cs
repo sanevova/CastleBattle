@@ -20,6 +20,8 @@ public class Hp : MonoBehaviour {
 
     public void TakeDamage(float damageValue) {
         value = Mathf.Max(0, value - damageValue);
-        Debug.Log(value);
+        if (value == 0) {
+            owner.Die();
+        }
     }
 }

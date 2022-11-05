@@ -27,4 +27,8 @@ public class Killable : MonoBehaviour {
             : transform.position;
         return Vector3.Distance(other.transform.position, closestPoint);
     }
+
+    public virtual void Die() {
+        Debug.Log($"Died - {name}");
+    }
 }
