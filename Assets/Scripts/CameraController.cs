@@ -27,7 +27,10 @@ public class CameraController : MonoBehaviour {
         }
         if (shouldGripCamera) {
             if (RaycastMouse(out RaycastHit hit)) {
-                transform.position += gripStartMousePosition - hit.point;
+                // adjust for `y` difference
+                var xzDifference = gripStartMousePosition - hit.point;
+                xzDifference.y = 0;
+                transform.position += xzDifference;
             }
         }
     }
