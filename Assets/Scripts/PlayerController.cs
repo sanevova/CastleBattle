@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public enum Team {
     Left,
@@ -11,10 +8,7 @@ public enum Team {
 public class PlayerController : MonoBehaviour {
     public Team team;
 
-    void Start() {
-    }
+    [Header("Gold")]
+    public int gold;
 
-    void Update() {
-
-    }
 }

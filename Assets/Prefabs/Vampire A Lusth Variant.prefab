@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  killRewardGold: 10
   hp: {fileID: 0}
   speed: 50
   rotationSpeed: 540
@@ -166,4 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   value: 0
-  owner: {fileID: 0}
+  hpOwner: {fileID: 0}

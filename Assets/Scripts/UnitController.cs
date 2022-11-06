@@ -19,6 +19,11 @@ public class UnitController : Killable {
     public float basicAttackCooldown = 2;
     public float basicAttackDamage = 10;
     private float basicAttackLastTime;
+    private static readonly List<string> kAttackAnimationNames = new() {
+        "Martelo 2",
+        "Mma Kick"
+    };
+
     private Killable target;
 
     // private Attack basicAttack = new() {
@@ -42,31 +47,33 @@ public class UnitController : Killable {
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(1)) {
-            if (CameraController.RaycastMouse(out var hit)) {
-                hit.point -= hit.point.y * Vector3.up;
-                movementDirection = hit.point - transform.position;
-            }
+        if (IsDead()) {
+            return;
         }
 
         AdjustYSpeed();
         Aggro();
+        Move();
+        Rotate();
+    }
 
-
+    void Move() {
         movementDirection.Normalize();
         var velocity = movementDirection * speed;
         velocity.y += ySpeed;
         characterController.Move(velocity * Time.deltaTime);
 
-        if (movementDirection != Vector3.zero) {
-            animator.SetBool("isMoving", true);
-            var dstRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, dstRotation, rotationSpeed * Time.deltaTime);
-        } else {
-            animator.SetBool("isMoving", false);
-        }
     }
-
+    void Rotate() {
+        if (IsInAttackAnimation()) {
+            return;
+        }
+        if (movementDirection == Vector3.zero) {
+            return;
+        }
+        var dstRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, dstRotation, rotationSpeed * Time.deltaTime);
+    }
 
     void AdjustYSpeed() {
         ySpeed += Physics.gravity.y * Time.deltaTime;
@@ -77,9 +84,23 @@ public class UnitController : Killable {
 
     public Killable ClosestEnemy() {
         return FindObjectsOfType<Killable>()
-            .Where(guy => IsEnemy(guy))
+            .Where(guy => IsEnemy(guy) && guy.IsAlive())
             .OrderBy(guy => DistanceTo(guy))
             .FirstOrDefault(x => x);
+    }
+
+    private bool IsInAttackAnimation() {
+        var clip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+        return kAttackAnimationNames.Contains(clip.name);
+    }
+
+    private bool CanAttack() {
+        return DistanceTo(target) <= basicAttackRadius // within attack range
+            && target.IsAlive();
+    }
+
+    private bool CanMove() {
+        return !CanAttack() && !IsInAttackAnimation();
     }
 
     private void Aggro() {
@@ -90,15 +111,17 @@ public class UnitController : Killable {
         if (target == null) {
             return;
         }
-        // if in attack range
-        if (DistanceTo(target) > basicAttackRadius) {
-            // move
-            movementDirection = target.transform.position - transform.position;
-        } else {
-            // stop
-            movementDirection = Vector3.zero;
-            // hit
+
+        if (CanAttack()) {
             BasicAttack(target);
+        }
+
+        if (CanMove()) {
+            movementDirection = target.transform.position - transform.position;
+            animator.SetBool("isMoving", true);
+        } else {
+            movementDirection = Vector3.zero;
+            animator.SetBool("isMoving", false);
         }
     }
 
@@ -107,7 +130,7 @@ public class UnitController : Killable {
             return;
         }
         animator.SetBool("isAttacking", true);
-        attackTarget.hp.TakeDamage(basicAttackDamage);
+        attackTarget.hp.TakeDamageFrom(this, basicAttackDamage);
         basicAttackLastTime = Time.time;
     }
 

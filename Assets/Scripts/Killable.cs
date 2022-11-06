@@ -5,6 +5,7 @@ using UnityEngine;
 public class Killable : MonoBehaviour {
     [Header("General")]
     public PlayerController owner;
+    public int killRewardGold;
 
     [HideInInspector]
     public Hp hp;
@@ -28,7 +29,19 @@ public class Killable : MonoBehaviour {
         return Vector3.Distance(other.transform.position, closestPoint);
     }
 
+    public bool IsAlive() {
+        return hp?.value > 0;
+    }
+
+    public bool IsDead() {
+        return !IsAlive();
+    }
+
     public virtual void Die() {
         Debug.Log($"Died - {name}");
+    }
+
+    public void DidKill(Killable deadGuy) {
+        owner.gold += deadGuy.killRewardGold;
     }
 }

@@ -7,21 +7,22 @@ public class Hp : MonoBehaviour {
 
     public float value;
     [HideInInspector]
-    public Killable owner;
+    public Killable hpOwner;
 
     void Awake() {
         value = maxHp;
-        owner = GetComponent<Killable>();
+        hpOwner = GetComponent<Killable>();
     }
 
     void Update() {
 
     }
 
-    public void TakeDamage(float damageValue) {
+    public void TakeDamageFrom(Killable damageSource, float damageValue) {
         value = Mathf.Max(0, value - damageValue);
         if (value == 0) {
-            owner.Die();
+            hpOwner.Die();
+            damageSource.DidKill(hpOwner);
         }
     }
 }
