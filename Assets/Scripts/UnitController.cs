@@ -54,23 +54,18 @@ public class UnitController : Killable {
         AdjustYSpeed();
         Aggro();
         Move();
-        Rotate();
+        Turn();
     }
 
     void Move() {
         movementDirection.Normalize();
-        var velocity = movementDirection * speed;
+        var velocity = CanMove() ? movementDirection : Vector3.zero;
+        velocity *= speed;
         velocity.y += ySpeed;
         characterController.Move(velocity * Time.deltaTime);
 
     }
-    void Rotate() {
-        if (IsInAttackAnimation()) {
-            return;
-        }
-        if (movementDirection == Vector3.zero) {
-            return;
-        }
+    void Turn() {
         var dstRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, dstRotation, rotationSpeed * Time.deltaTime);
     }
@@ -84,7 +79,7 @@ public class UnitController : Killable {
 
     public Killable ClosestEnemy() {
         return FindObjectsOfType<Killable>()
-            .Where(guy => IsEnemy(guy) && guy.IsAlive())
+            .Where(guy => guy != null && IsEnemy(guy) && guy.IsAlive())
             .OrderBy(guy => DistanceTo(guy))
             .FirstOrDefault(x => x);
     }
@@ -120,7 +115,6 @@ public class UnitController : Killable {
             movementDirection = target.transform.position - transform.position;
             animator.SetBool("isMoving", true);
         } else {
-            movementDirection = Vector3.zero;
             animator.SetBool("isMoving", false);
         }
     }
@@ -148,6 +142,7 @@ public class UnitController : Killable {
 
     public override void Die() {
         animator.Play("Death");
+        characterController.enabled = false;
         base.Die();
         Destroy(gameObject, 3f);
     }
