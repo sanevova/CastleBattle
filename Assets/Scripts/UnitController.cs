@@ -128,10 +128,6 @@ public class UnitController : Killable {
         basicAttackLastTime = Time.time;
     }
 
-    private bool IsEnemy(Killable other) {
-        return owner.team != other.owner.team;
-    }
-
     private float DistanceTo(Killable other) {
         return other.DistanceFrom(this);
     }
