@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &111592033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254094317}
   m_Enabled: 1
-  m_CellSize: {x: 20, y: 20, z: 0}
+  m_CellSize: {x: 10, y: 10, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -214,6 +214,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &257836313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4139603417132433460, guid: f403462de13c087459d668b8389849f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4139603418010672310}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &280958202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -963,6 +969,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 111592033}
   goldText: {fileID: 597997383}
+--- !u!1 &703890146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4139603417132433460, guid: 8ebae74b1873c4740a236e6d29ff97f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1440705006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &822211063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6022549831751800523, guid: 04750b835d226074e989a96f1346747c,
@@ -1214,7 +1226,7 @@ PrefabInstance:
     - target: {fileID: 4139603417132433461, guid: 8ebae74b1873c4740a236e6d29ff97f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 478.7
+      value: 406.6
       objectReference: {fileID: 0}
     - target: {fileID: 4139603417132433461, guid: 8ebae74b1873c4740a236e6d29ff97f3,
         type: 3}
@@ -1224,7 +1236,7 @@ PrefabInstance:
     - target: {fileID: 4139603417132433461, guid: 8ebae74b1873c4740a236e6d29ff97f3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 278.4
+      value: 257.1
       objectReference: {fileID: 0}
     - target: {fileID: 4139603417132433461, guid: 8ebae74b1873c4740a236e6d29ff97f3,
         type: 3}
@@ -1401,14 +1413,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 111592033}
   preview: {fileID: 1616876040}
-  sampleBuilding: {fileID: 4139603417132433460, guid: f403462de13c087459d668b8389849f2,
-    type: 3}
-  yOffset: 15.5
+  sampleVampireBuilding: {fileID: 257836313}
+  sampleWitchBuilding: {fileID: 703890146}
+  vampireBuildingYOffset: 15.5
   sampleTile: {fileID: 8816015006857748055, guid: 2ee4c134ecb3a8541b876bb7a60b246e,
     type: 3}
   blueMaterial: {fileID: 2100000, guid: 27dd7cd8a57580e46850c6add967e28b, type: 2}
   redMaterial: {fileID: 2100000, guid: 292c933a9f3be3f449d66ed1a623c91e, type: 2}
-  tileDisplayOffset: {x: 10, y: 15}
+  tileDisplayOffset: {x: 5, y: 5}
 --- !u!483693784 &1658203869
 TilemapRenderer:
   m_ObjectHideFlags: 0

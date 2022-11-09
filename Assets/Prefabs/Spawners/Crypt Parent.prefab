@@ -122,6 +122,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4139603417132433461}
     m_Modifications:
+    - target: {fileID: 3111719937218878296, guid: 04750b835d226074e989a96f1346747c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 7.588536
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111719937218878296, guid: 04750b835d226074e989a96f1346747c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 13.00671
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111719937218878296, guid: 04750b835d226074e989a96f1346747c,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 10.571002
+      objectReference: {fileID: 0}
     - target: {fileID: 6022549831751800523, guid: 04750b835d226074e989a96f1346747c,
         type: 3}
       propertyPath: m_Name
@@ -140,17 +155,17 @@ PrefabInstance:
     - target: {fileID: 6404036779474144369, guid: 04750b835d226074e989a96f1346747c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6404036779474144369, guid: 04750b835d226074e989a96f1346747c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6404036779474144369, guid: 04750b835d226074e989a96f1346747c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6404036779474144369, guid: 04750b835d226074e989a96f1346747c,
         type: 3}

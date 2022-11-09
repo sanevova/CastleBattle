@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5477699378463458094}
   - component: {fileID: 7067089615526535659}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4139603417132433461}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7067089615526535659
 MonoBehaviour:
@@ -60,7 +60,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4139603417132433461}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Witch Spawn Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,9 +79,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8195308744181765307}
-  - {fileID: 4139603418421979357}
   - {fileID: 5477699378463458094}
+  - {fileID: 4139603418421979357}
+  - {fileID: 8195308744181765307}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4139603418421979357}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,9 +127,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Church_1
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 2efab142ea16dc343808953982735a99, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 2efab142ea16dc343808953982735a99, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 2efab142ea16dc343808953982735a99, type: 3}
       propertyPath: m_LocalScale.x

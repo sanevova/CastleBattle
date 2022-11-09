@@ -12,9 +12,11 @@ public class BuilderController : MonoBehaviour {
     [SerializeField]
     private GameObject preview;
     [SerializeField]
-    public GameObject sampleBuilding;
+    public GameObject sampleVampireBuilding;
     [SerializeField]
-    private float yOffset;
+    public GameObject sampleWitchBuilding;
+    [SerializeField]
+    private float vampireBuildingYOffset;
 
 
     [Header("Tiles")]
@@ -31,12 +33,23 @@ public class BuilderController : MonoBehaviour {
     private Tilemap map;
     private readonly Dictionary<Vector3Int, GameObject> occupiedTiles = new();
     private MeshRenderer previewRenderer;
+    private MeshFilter previewMeshFilter;
     private readonly Dictionary<Vector3Int, GameObject> hoverTiles = new();
+    private GameObject selectedBuilding;
+    private Dictionary<KeyCode, GameObject> buildingBinds;
+    private float yOffset;
 
     void Start() {
         map = GetComponent<Tilemap>();
         previewRenderer = preview.GetComponent<MeshRenderer>();
         PlaceTile(Vector3Int.zero);
+        buildingBinds = new() {
+            {KeyCode.Q, sampleVampireBuilding},
+            {KeyCode.W, sampleWitchBuilding},
+        };
+        selectedBuilding = sampleVampireBuilding;
+        yOffset = vampireBuildingYOffset;
+        previewMeshFilter = preview.GetComponent<MeshFilter>();
     }
 
     GameObject PlaceTile(Vector3Int position) {
@@ -46,6 +59,7 @@ public class BuilderController : MonoBehaviour {
     }
 
     void Update() {
+        SelectSampleBuilding();
         Vector3 mouseCellCenter = MovePreview();
         Cleanup();
         GetBaseMinMaxCells(out Vector3Int baseMinCell, out Vector3Int baseMaxCell);
@@ -59,6 +73,29 @@ public class BuilderController : MonoBehaviour {
             // Build
             Build(mouseCellCenter, baseMinCell, baseMaxCell);
         }
+    }
+
+    void SelectSampleBuilding() {
+        foreach (var bindAndBuilding in buildingBinds) {
+            if (Input.GetKeyDown(bindAndBuilding.Key)) {
+                SelectBuilding(bindAndBuilding.Value);
+                return;
+            }
+        }
+    }
+
+
+    void SelectBuilding(GameObject newBuilding) {
+        if (newBuilding == selectedBuilding) {
+            return;
+        }
+        if (selectedBuilding == sampleWitchBuilding || newBuilding == sampleWitchBuilding) {
+            preview.transform.Rotate(Vector3.up, 180);
+        }
+        selectedBuilding = newBuilding;
+        yOffset = selectedBuilding == sampleVampireBuilding ? vampireBuildingYOffset : 0;
+        previewMeshFilter.mesh = newBuilding.GetComponentInChildren<MeshFilter>().mesh;
+        previewRenderer = preview.GetComponent<MeshRenderer>();
     }
 
     Vector3 MovePreview() {
@@ -110,7 +147,7 @@ public class BuilderController : MonoBehaviour {
     }
 
     void Build(Vector3 buildPos, Vector3Int baseMinCell, Vector3Int baseMaxCell) {
-        var building = Instantiate(sampleBuilding, buildPos, Quaternion.identity);
+        var building = Instantiate(selectedBuilding, buildPos, Quaternion.identity);
         var spawner = building.GetComponentsInChildren<SpawnerController>().First();
         spawner.owner = this.owner;
 
