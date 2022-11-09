@@ -1,55 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2343130281990598039
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 942431300560115669}
-  - component: {fileID: 4178603093324510498}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &942431300560115669
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2343130281990598039}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4139603417132433461}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4178603093324510498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2343130281990598039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96ee4bca556000a4d9ea1e99383b2618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  killRewardGold: 100
-  hp: {fileID: 0}
-  spawnTarget: {fileID: 1627238513, guid: c45172c16d6d48e418e6c6785924e22f, type: 3}
-  spawnPoint: {fileID: 4139603418421979357}
-  spawnDelay: 5
 --- !u!1 &4139603417132433460
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4139603417132433461}
+  - component: {fileID: 1984067785156762879}
   m_Layer: 0
   m_Name: Crypt Parent
   m_TagString: Untagged
@@ -78,12 +29,30 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 942431300560115669}
   - {fileID: 4139603418421979357}
   - {fileID: 4537493299239522321}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1984067785156762879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139603417132433460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ee4bca556000a4d9ea1e99383b2618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  killRewardGold: 100
+  hp: {fileID: 0}
+  buildCost: 10
+  spawnTarget: {fileID: 1627238513, guid: c45172c16d6d48e418e6c6785924e22f, type: 3}
+  spawnPoint: {fileID: 4139603418421979357}
+  spawnDelay: 5
 --- !u!1 &4139603418421979356
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +82,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4139603417132433461}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7361097960810404960
 PrefabInstance:
@@ -150,7 +119,7 @@ PrefabInstance:
     - target: {fileID: 6404036779474144369, guid: 04750b835d226074e989a96f1346747c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6404036779474144369, guid: 04750b835d226074e989a96f1346747c,
         type: 3}

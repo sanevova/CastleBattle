@@ -5,16 +5,16 @@ using UnityEngine.Tilemaps;
 
 public class BuilderController : MonoBehaviour {
     [Header("General")]
-    public PlayerController owner;
+    public PlayerController player;
 
 
     [Header("Building Preview")]
     [SerializeField]
     private GameObject preview;
     [SerializeField]
-    public GameObject sampleVampireBuilding;
+    public SpawnerController sampleVampireBuilding;
     [SerializeField]
-    public GameObject sampleWitchBuilding;
+    public SpawnerController sampleWitchBuilding;
     [SerializeField]
     private float vampireBuildingYOffset;
 
@@ -35,8 +35,8 @@ public class BuilderController : MonoBehaviour {
     private MeshRenderer previewRenderer;
     private MeshFilter previewMeshFilter;
     private readonly Dictionary<Vector3Int, GameObject> hoverTiles = new();
-    private GameObject selectedBuilding;
-    private Dictionary<KeyCode, GameObject> buildingBinds;
+    private SpawnerController selectedBuilding;
+    private Dictionary<KeyCode, SpawnerController> buildingBinds;
     private float yOffset;
 
     void Start() {
@@ -68,9 +68,11 @@ public class BuilderController : MonoBehaviour {
         if (!canBuildHere) {
             return;
         }
+        if (!CanAffordToBuild()) {
+            return;
+        }
 
         if (Input.GetMouseButtonDown(0)) {
-            // Build
             Build(mouseCellCenter, baseMinCell, baseMaxCell);
         }
     }
@@ -85,7 +87,7 @@ public class BuilderController : MonoBehaviour {
     }
 
 
-    void SelectBuilding(GameObject newBuilding) {
+    void SelectBuilding(SpawnerController newBuilding) {
         if (newBuilding == selectedBuilding) {
             return;
         }
@@ -149,7 +151,8 @@ public class BuilderController : MonoBehaviour {
     void Build(Vector3 buildPos, Vector3Int baseMinCell, Vector3Int baseMaxCell) {
         var building = Instantiate(selectedBuilding, buildPos, Quaternion.identity);
         var spawner = building.GetComponentsInChildren<SpawnerController>().First();
-        spawner.owner = this.owner;
+        spawner.owner = this.player;
+        player.gold -= selectedBuilding.buildCost;
 
         for (int row = baseMinCell.x; row <= baseMaxCell.x; ++row) {
             for (int col = baseMinCell.y; col <= baseMaxCell.y; ++col) {
@@ -160,4 +163,7 @@ public class BuilderController : MonoBehaviour {
         }
     }
 
+    bool CanAffordToBuild() {
+        return player.gold >= selectedBuilding.buildCost;
+    }
 }

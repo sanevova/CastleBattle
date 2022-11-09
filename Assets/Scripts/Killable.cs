@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Killable : MonoBehaviour {
     [Header("General")]
     public PlayerController owner;
-    public int killRewardGold;
+    public uint killRewardGold;
 
     [HideInInspector]
     public Hp hp;

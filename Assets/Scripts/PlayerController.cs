@@ -9,6 +9,6 @@ public class PlayerController : MonoBehaviour {
     public Team team;
 
     [Header("Gold")]
-    public int gold;
+    public uint gold;
 
 }
